@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const {MongoClient} = require('mongodb');
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user'); 
+const path = require('path');
 //Connection à la base de données 
 mongoose.connect('mongodb+srv://talel:talel123@cluster0.kp29z.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
@@ -21,9 +22,9 @@ app.use((req, res, next) => {
     next();
   });
 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
-
 
 
 module.exports  = app;

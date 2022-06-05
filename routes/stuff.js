@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const stuffCtrl = require('../controlers/stuff');
 const auth = require('../middleware/auth');
-
+const multer = require('../middleware/multer-config')
   ///Enregistrer des données dans la base de données
 
-  router.post('/',auth ,stuffCtrl.createThing)
+  router.post('/',auth ,multer,stuffCtrl.createThing)
 
 
 //Récuperation de tous les objets de la base de données 
@@ -17,7 +17,7 @@ router.get('/:id', auth ,stuffCtrl.getOneThing)
 
 
 //Modification d'un objet 
-router.put('/:id',auth ,stuffCtrl.modifyThing )
+router.put('/:id',auth ,multer, stuffCtrl.modifyThing )
 
 //Suppression d'un objet 
 router.delete('/:id', auth, stuffCtrl.deleteThing);
