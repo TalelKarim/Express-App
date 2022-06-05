@@ -1,25 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const stuffCtrl = require('../controlers/stuff');
-
+const auth = require('../middleware/auth');
 
   ///Enregistrer des données dans la base de données
 
-  router.post('/',stuffCtrl.createThing)
+  router.post('/',auth ,stuffCtrl.createThing)
 
 
 //Récuperation de tous les objets de la base de données 
-router.get('/',stuffCtrl.getAllThings)
+router.get('/',auth ,stuffCtrl.getAllThings)
 
 
 // Récuperation d'un seul objet de la base de données 
-router.get('/:id' ,stuffCtrl.getOneThing)
+router.get('/:id', auth ,stuffCtrl.getOneThing)
 
 
 //Modification d'un objet 
-router.put('/:id',stuffCtrl.modifyThing )
+router.put('/:id',auth ,stuffCtrl.modifyThing )
 
 //Suppression d'un objet 
-router.delete('/:id', stuffCtrl.deleteThing);
+router.delete('/:id', auth, stuffCtrl.deleteThing);
 
 module.exports = router;
